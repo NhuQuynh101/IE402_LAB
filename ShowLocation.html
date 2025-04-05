@@ -1,0 +1,533 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>ArcGIS JavaScript Tutorials: Create a Starter App</title>
+    <style>
+        html, body, #viewDiv {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://js.arcgis.com/4.15/esri/themes/light/main.css">
+    <script src="https://js.arcgis.com/4.15/"></script>
+    <script src="ProvinceData.js"></script>
+    <script src="ProvincialHighwayData.js"></script>
+
+    <script>
+        var point_template_location = {
+            title: "{Name}",
+            content: "<b>{Location}</b>."
+        };
+
+        var point_template_line = {
+            title: "{Name}",
+            content: "<b>{Location}</b>."
+        };
+
+        var jsondata = {
+            "points": [
+                {
+                    type: "point",
+                    longitude: 106.5179686,
+                    latitude: 10.5607985,
+                    Name: "Khu di tích lịch sử Vàm Nhựt Tảo",
+                    Location: "Vàm Nhựt Tảo là địa danh lịch sử nổi tiếng của dân tộc Việt Nam. Tại đây vào ngày 10/12/1861, người anh hùng dân tộc Nguyễn Trung Trực cùng nhiều chiến sĩ yêu nước đã đánh chìm tàu chiến L'Esperance của thực dân Pháp xâm lược, đây được gọi là chiến công 'hòa hồng Nhựt Tảo'",
+                    symbol: {
+                        type: "picture-marker",
+                        url: 'images/ditichlichsu.png',
+                        color: [255, 0, 0],
+                        width: '48px',
+                        height: '48px',
+                    },
+                    popupTemplate: point_template_location
+                },
+                {
+                    type: "point",
+                    longitude: 106.4412688,
+                    latitude: 10.7921811,
+                    Name: "Trường Đại học Tân Tạo",
+                    Location: "Trường Đại học Tân Tạo (Tan Tao University, viết tắt TTU) là một trường đại học tư thục của Việt Nam giảng dạy bằng tiếng Anh và Tiếng Việt theo chương trình của Viện Đại học Duke của Hoa Kỳ, đặt tại Long An. ",
+                    symbol: {
+                        type: "picture-marker",
+                        url: 'images/university.png',
+                        color: [255, 255, 255],
+                        width: '48px',
+                        height: '48px',
+                    },
+                    popupTemplate: point_template_location
+                },
+                {
+                    type: "point",
+                    longitude: 106.46128775462519,
+                    latitude: 10.637916665742933,
+                    Name: "Xứ sở hạnh phúc - HappyLand",
+                    Location: "Là một trong những khu du lịch cũng như trung tâm vui chơi giải trí được ví như “Xứ sở hạnh phúc” nằm bên cạnh dòng sông Vàm Cỏ Đông, khu du lịch HappyLand Long An là một trong những điểm đến hứa hẹn sẽ khiến cho du khách có thể tận hưởng những trải nghiệm tuyệt vời, những hạng mục vui chơi giải trí hàng đầu Việt Nam.",
+                    symbol: {
+                        type: "picture-marker",
+                        url: 'images/tourism.png',
+                        color: [255, 255, 255],
+                        width: '48px',
+                        height: '48px',
+                    },
+                    popupTemplate: point_template_location
+                },
+                {
+                    type: "point",
+                    longitude: 105.98731478385159,
+                    latitude: 10.71501499134177,
+                    Name: "Làng nổi Tân Lập",
+                    Location: "Khu du lịch làng nổi Tân Lập là địa điểm du lịch nổi tiếng ở tỉnh Long An trong thời gian gần đây, thu hút rất đông du khách trong và ngoài tỉnh đến tham quan, khám phá và trải nghiệm cuộc sống của người dân vùng sông nước.",
+                    symbol: {
+                        type: "picture-marker",
+                        url: 'images/village.png',
+                        color: [255, 255, 255],
+                        width: '48px',
+                        height: '48px',
+                    },
+                    popupTemplate: point_template_location
+                },
+                {
+                    type: "point",
+                    longitude: 106.08493576111896,
+                    latitude: 10.726220270452956,
+                    Name: "Khu du lịch Cánh Đồng Bất Tận",
+                    Location: "KKhu du lịch Cánh Đồng Bất Tận là điểm tham quan du lịch nổi tiếng tại Khu bảo tồn dược liệu Đồng Tháp Mười, thuộc xã Bình Phong Thạnh, huyện Mộc Hóa, tỉnh Long An.",
+                    symbol: {
+                        type: "picture-marker",
+                        url: 'images/field.png',
+                        color: [255, 255, 255],
+                        width: '48px',
+                        height: '48px',
+                    },
+                    popupTemplate: point_template_location
+                },
+                {
+                    type: "point",
+                    longitude: 106.40013033983973,
+                    latitude: 10.535756961876672,
+                    Name: "Bảo tàng tỉnh Long An",
+                    Location: "Bảo tàng Bảo tàng Long An lưu giữ khá nhiều hiện vật liên quan đến văn hoá Óc Eo như: các loại tượng thần, những dụng cụ lao động bằng đá, những đố đất nung và gốm, những bộ xương người...có niên đại hơn 2.700 năm.",
+                    symbol: {
+                        type: "picture-marker",
+                        url: 'images/icons8-museum-100.png',
+                        color: [255, 255, 255],
+                        width: '48px',
+                        height: '48px',
+                    },
+                    popupTemplate: point_template_location
+                },
+                {
+                    type: "point",
+                    longitude: 106.46164655290272,
+                    latitude: 10.900647829616975,
+                    Name: "Công viên 7 kỳ quan",
+                    Location: "Đến công viên 7 kỳ quan thế giới tại Long An này, bạn sẽ được thu vào mắt những kỳ quan nổi tiếng thế giới, bạn có thể vi vu đến Mỹ ngắm nhìn tượng nữ thần tự do, sang đến Pháp ngắm tháp Eiffel, ngắm tháp nghiêng Pisa của Italia, đến nước Nga - xứ sở bạch dương để ngắm nhìn nhà thờ thánh Basil… và rất nhiều kỳ quan nổi tiếng thế giới khác chỉ trong một điểm đến.",
+                    symbol: {
+                        type: "picture-marker",
+                        url: 'images/park.png',
+                        color: [255, 255, 255],
+                        width: '48px',
+                        height: '48px',
+                    },
+                    popupTemplate: point_template_location
+                },
+                {
+                    type: "point",
+                    longitude: 106.69146306638987,
+                    latitude: 10.482697535362325,
+                    Name: "Di tích Nhà trăm cột",
+                    Location: "Nhà trăm cột cù lao Long Hựu là biểu tượng văn hóa, là di tích có vị trí của trọng trong bản đồ quy hoạch phát triển du lịch của tỉnh Long An.",
+                    symbol: {
+                        type: "picture-marker",
+                        url: 'images/remains.png',
+                        color: [255, 255, 255],
+                        width: '48px',
+                        height: '48px',
+                    },
+                    popupTemplate: point_template_location
+                },
+                {
+                    type: "point",
+                    longitude: 106.4173289933743,
+                    latitude: 10.559644285301566,
+                    Name: "Tượng đài chiến thắng Long An",
+                    Location: "Khu công viên Tượng đài chiến thắng là công trình văn hóa tiêu biểu của tỉnh, nơi đây không chỉ là điểm tham quan, giải trí mà còn thể hiện rõ nét về truyền thống lịch sử của đất và người Long An trong kháng chiến.",
+                    symbol: {
+                        type: "picture-marker",
+                        url: 'images/monument.png',
+                        color: [255, 255, 255],
+                        width: '48px',
+                        height: '48px',
+                    },
+                    popupTemplate: point_template_location
+                }
+            ],
+            "polygons": [
+                {
+                    type: "polygon",
+                    rings: BenLuc,
+                    Name: "Bến Lức",
+                    Location: "Bến Lức nằm ở phía nam nội thành của thành phố Cần Thơ. Bến Lức có diện tích 62,53 km², dân số năm 2019 là 105.393 người, mật độ dân số đạt 1.685 người/km²",
+                    symbol: {
+                        type: "simple-fill",
+                        color: [255, 0, 0, 0.4],
+                        outline: {
+                            color: [255, 0, 0],
+                            width: 1
+                        }
+                    },
+                    popupTemplate: point_template_location
+                },
+                {
+                    type: "polygon",
+                    rings: CanDuoc,
+                    Name: "Cần Đước",
+                    Location: "Cần Đước nằm ở phía nam nội thành của thành phố Cần Thơ. Cần Đước có diện tích 62,53 km², dân số năm 2019 là 105.393 người, mật độ dân số đạt 1.685 người/km²",
+                    symbol: {
+                        type: "simple-fill",
+                        color: [0, 255, 0, 0.4],
+                        outline: {
+                            color: [0, 255, 0],
+                            width: 1
+                        }
+                    },
+                    popupTemplate: point_template_location
+                },
+                {
+                    type: "polygon",
+                    rings: CanGiuoc,
+                    Name: "Cần Giuộc",
+                    Location: "Cần Giuộc nằm ở phía nam nội thành của thành phố Cần Thơ. Cần Giuộc có diện tích 62,53 km², dân số năm 2019 là 105.393 người, mật độ dân số đạt 1.685 người/km²",
+                    symbol: {
+                        type: "simple-fill",
+                        color: [0, 0, 255, 0.4],
+                        outline: {
+                            color: [0, 0, 255],
+                            width: 1
+                        }
+                    },
+                    popupTemplate: point_template_location
+                },
+                {
+                    type: "polygon",
+                    rings: DucHoa,
+                    Name: "Đức Hòa",
+                    Location: "Đức Hòa nằm ở phía nam nội thành của thành phố Cần Thơ. Đức Hòa có diện tích 62,53 km², dân số năm 2019 là 105.393 người, mật độ dân số đạt 1.685 người/km²",
+                    symbol: {
+                        type: "simple-fill",
+                        color: [255, 255, 0, 0.4],
+                        outline: {
+                            color: [255, 255, 0],
+                            width: 1
+                        }
+                    },
+                    popupTemplate: point_template_location
+                },
+                {
+                    type: "polygon",
+                    rings: DucHue,
+                    Name: "Đức Huệ",
+                    Location: "Đức Huệ nằm ở phía nam nội thành của thành phố Cần Thơ. Đức Huệ có diện tích 62,53 km², dân số năm 2019 là 105.393 người, mật độ dân số đạt 1.685 người/km²",
+                    symbol: {
+                        type: "simple-fill",
+                        color: [255, 0, 255, 0.4],
+                        outline: {
+                            color: [255, 0, 255],
+                            width: 1
+                        }
+                    },
+                    popupTemplate: point_template_location
+                },
+                {
+                    type: "polygon",
+                    rings: KienTuong,
+                    Name: "Kiến Tường",
+                    Location: "Kiến Tường nằm ở phía nam nội thành của thành phố Cần Thơ. Kiến Tường có diện tích 62,53 km², dân số năm 2019 là 105.393 người, mật độ dân số đạt 1.685 người/km²",
+                    symbol: {
+                        type: "simple-fill",
+                        color: [0, 255, 255, 0.4],
+                        outline: {
+                            color: [0, 255, 255],
+                            width: 1
+                        }
+                    },
+                    popupTemplate: point_template_location
+                },
+                {
+                    type: "polygon",
+                    rings: MocHoa,
+                    Name: "Mộc Hòa",
+                    Location: "Mộc Hòa nằm ở phía nam nội thành của thành phố Cần Thơ. Mộc Hòa có diện tích 62,53 km², dân số năm 2019 là 105.393 người, mật độ dân số đạt 1.685 người/km²",
+                    symbol: {
+                        type: "simple-fill",
+                        color: [128, 0, 0, 0.4],
+                        outline: {
+                            color: [128, 0, 0],
+                            width: 1
+                        }
+                    },
+                    popupTemplate: point_template_location
+                },
+                {
+                    type: "polygon",
+                    rings: TanAn,
+                    Name: "Tân An",
+                    Location: "Tân An nằm ở phía nam nội thành của thành phố Cần Thơ. Tân An có diện tích 62,53 km², dân số năm 2019 là 105.393 người, mật độ dân số đạt 1.685 người/km²",
+                    symbol: {
+                        type: "simple-fill",
+                        color: [0, 128, 0, 0.4],
+                        outline: {
+                            color: [0, 128, 0],
+                            width: 1
+                        }
+                    },
+                    popupTemplate: point_template_location
+                },
+                {
+                    type: "polygon",
+                    rings: TanHung,
+                    Name: "Tân Hưng",
+                    Location: "Tân Hưng nằm ở phía nam nội thành của thành phố Cần Thơ. Tân Hưng có diện tích 62,53 km², dân số năm 2019 là 105.393 người, mật độ dân số đạt 1.685 người/km²",
+                    symbol: {
+                        type: "simple-fill",
+                        color: [0, 0, 128, 0.4],
+                        outline: {
+                            color: [0, 0, 128],
+                            width: 1
+                        }
+                    },
+                    popupTemplate: point_template_location
+                },
+                {
+                    type: "polygon",
+                    rings: TanThanh,
+                    Name: "Tân Thành",
+                    Location: "Tân Thành nằm ở phía nam nội thành của thành phố Cần Thơ. Tân Thành có diện tích 62,53 km², dân số năm 2019 là 105.393 người, mật độ dân số đạt 1.685 người/km²",
+                    symbol: {
+                        type: "simple-fill",
+                        color: [128, 128, 0, 0.4],
+                        outline: {
+                            color: [128, 128, 0],
+                            width: 1
+                        }
+                    },
+                    popupTemplate: point_template_location
+                },
+                {
+                    type: "polygon",
+                    rings: TanTru,
+                    Name: "Tân Trụ",
+                    Location: "Tân Trụ nằm ở phía nam nội thành của thành phố Cần Thơ. Tân Trụ có diện tích 62,53 km², dân số năm 2019 là 105.393 người, mật độ dân số đạt 1.685 người/km²",
+                    symbol: {
+                        type: "simple-fill",
+                        color: [128, 0, 128, 0.4],
+                        outline: {
+                            color: [128, 0, 128],
+                            width: 1
+                        }
+                    },
+                    popupTemplate: point_template_location
+                },
+                {
+                    type: "polygon",
+                    rings: ThanhHoa,
+                    Name: "Thạnh Hóa",
+                    Location: "Thạnh Hóa nằm ở phía nam nội thành của thành phố Cần Thơ. Thạnh Hóa có diện tích 62,53 km², dân số năm 2019 là 105.393 người, mật độ dân số đạt 1.685 người/km²",
+                    symbol: {
+                        type: "simple-fill",
+                        color: [0, 128, 128, 0.4],
+                        outline: {
+                            color: [0, 128, 128],
+                            width: 1
+                        }
+                    },
+                    popupTemplate: point_template_location
+                },
+                {
+                    type: "polygon",
+                    rings: ThuThua,
+                    Name: "Thủ Thừa",
+                    Location: "Thủ Thừa nằm ở phía nam nội thành của thành phố Cần Thơ. Thủ Thừa có diện tích 62,53 km², dân số năm 2019 là 105.393 người, mật độ dân số đạt 1.685 người/km²",
+                    symbol: {
+                        type: "simple-fill",
+                        color: [255, 128, 0, 0.4],
+                        outline: {
+                            color: [255, 128, 0],
+                            width: 1
+                        }
+                    },
+                    popupTemplate: point_template_location
+                },
+                {
+                    type: "polygon",
+                    rings: VinhHung,
+                    Name: "Vĩnh Hưng",
+                    Location: "Vĩnh Hưng nằm ở phía nam nội thành của thành phố Cần Thơ. Vĩnh Hưng có diện tích 62,53 km², dân số năm 2019 là 105.393 người, mật độ dân số đạt 1.685 người/km²",
+                    symbol: {
+                        type: "simple-fill",
+                        color: [0, 255, 128, 0.4],
+                        outline: {
+                            color: [0, 255, 128],
+                            width: 1
+                        }
+                    },
+                    popupTemplate: point_template_location
+                },
+                {
+                    type: "polygon",
+                    rings: ChauThanh,
+                    Name: "Châu Thành",
+                    Location: "Châu Thành nằm ở phía nam nội thành của thành phố Cần Thơ. Châu Thành có diện tích 62,53 km², dân số năm 2019 là 105.393 người, mật độ dân số đạt 1.685 người/km²",
+                    symbol: {
+                        type: "simple-fill",
+                        color: [255, 128, 128, 0.4],
+                        outline: {
+                            color: [255, 128, 128],
+                            width: 1
+                        }
+                    },
+                    popupTemplate: point_template_location
+                }
+            ],
+            "lines": [
+                {
+                    type: "polyline",
+                    paths: QL1A,
+                    Name: "QL1A",
+                    Location: "QL1A là đường cao tốc nối thành phố Cần Thơ với thành phố Hồ Chí Minh",
+                    symbol: {
+                        type: "simple-line",
+                        color: [255, 0, 72],
+                        width: 2
+                    },
+                    popupTemplate: point_template_line
+                },
+                {
+                    type: "polyline",
+                    paths: CT01,
+                    Name: "CT01",
+                    Location: "CT01 là đường cao tốc nối thành phố Cần Thơ với thành phố Hồ Chí Minh",
+                    symbol: {
+                        type: "simple-line",
+                        color: [255, 0, 72],
+                        width: 2
+                    },
+                    popupTemplate: point_template_line
+                },
+                {
+                    type: "polyline",
+                    paths: QL62,
+                    Name: "QL62",
+                    Location: "Quốc lộ 62 là con đường chạy hoàn toàn trong tỉnh Long An, từ Thành phố Tân An đến thị xã Kiến Tường, dài 76,5 km.",
+                    symbol: {
+                        type: "simple-line",
+                        color: [255, 0, 72],
+                        width: 2
+                    },
+                    popupTemplate: point_template_line
+                },
+                {
+                    type: "polyline",
+                    paths: QL50,
+                    Name: "QL50",
+                    Location: "Quốc lộ 50 là con đường chạy hoàn toàn trong tỉnh Long An, từ thị xã Kiến Tường đến thị xã Tân An, dài 30,5 km.",
+                    symbol: {
+                        type: "simple-line",
+                        color: [255, 0, 72],
+                        width: 2
+                    },
+                    popupTemplate: point_template_line
+                },
+                {
+                    type: "polyline",
+                    paths: DT831,
+                    Name: "DT831",
+                    Location: "ĐT 831 nối QL62 với các huyện Tân Hưng, Vĩnh Hưng (tỉnh Long An) và các huyện của tỉnh Đồng Tháp, An Giang.",
+                    symbol: {
+                        type: "simple-line",
+                        color: [255, 0, 72],
+                        width: 2
+                    },
+                    popupTemplate: point_template_line
+                },
+                {
+                    type: "polyline",
+                    paths: QL62_1,
+                    Name: "QL62_1",
+                    Location: "QL62_1 là đường cao tốc nối thành phố Cần Thơ với thành phố Hồ Chí Minh",
+                    symbol: {
+                        type: "simple-line",
+                        color: [255, 0, 72],
+                        width: 2
+                    },
+                    popupTemplate: point_template_line
+                },
+                {
+                    type: "polyline",
+                    paths: DT839,
+                    Name: "DT839",
+                    Location: "Đường tỉnh 839 có điểm đầu tại thị trấn Đông Thành với Di tích lịch sử Bình Thành, đi đến điểm cuối cùng tại chợ Mareng (Chợ Thuận Hiệp)",
+                    symbol: {
+                        type: "simple-line",
+                        color: [255, 0, 72],
+                        width: 2
+                    },
+                    popupTemplate: point_template_line
+                }
+            ]
+        };
+        require([
+            "esri/Map",
+            "esri/views/MapView",
+            "esri/Graphic",
+            "esri/layers/GraphicsLayer"
+        ], function (Map, MapView, Graphic, GraphicsLayer) {
+
+            var map = new Map({
+                basemap: "topo-vector"
+            });
+            map.on("load", function () {
+                map.graphics.enableMouseEvents();
+            });
+
+            var view = new MapView({
+                container: "viewDiv",
+                map: map,
+                center: [106.31967338582635, 10.729621852874793],
+                zoom: 12,
+                highlightOptions: {
+                    color: "blue"
+                }
+            });
+            var createGraphic = function (data) {
+                return new Graphic({
+                    geometry: data,
+                    symbol: data.symbol,
+                    attributes: data,
+                    popupTemplate: data.popupTemplate
+                });
+            };
+            var graphicsLayer = new GraphicsLayer();
+            jsondata.points.forEach(function (data) {
+                graphicsLayer.add(createGraphic(data));
+            });
+            jsondata.lines.forEach(function (data) {
+                graphicsLayer.add(createGraphic(data));
+            });
+            jsondata.polygons.forEach(function (data) {
+                graphicsLayer.add(createGraphic(data));
+            });
+            map.add(graphicsLayer);
+
+
+        });
+    </script>
+</head>
+<body>
+<div id="viewDiv"></div>
+</body>
+</html>
