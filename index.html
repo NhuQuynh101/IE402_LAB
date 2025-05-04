@@ -1,0 +1,101 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <title>BTTH2-Nhom5</title>
+
+    <link
+      rel="stylesheet"
+      href="https://js.arcgis.com/4.15/esri/themes/light/main.css"
+    />
+    <script src="https://js.arcgis.com/4.15/"></script>
+
+    <style>
+      html,
+      body,
+      #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+
+    <script>
+      require([
+        "esri/Map",
+        "esri/views/SceneView",
+        "esri/layers/GraphicsLayer",
+        "esri/geometry/Mesh",
+        "esri/geometry/Point",
+        "esri/Graphic"
+      ], function (
+        Map,
+        SceneView,
+        GraphicsLayer,
+        Mesh,
+        Point,
+        Graphic
+      ) {
+        const sketchLayer = new GraphicsLayer({
+          elevationInfo: {
+            mode: "absolute-height"
+          },
+          title: "Sketched geometries"
+        });
+
+        const map = new Map({
+          basemap: "topo-vector",
+          ground: "world-elevation"
+        });
+
+        const view = new SceneView({
+          container: "viewDiv",
+          map: map,
+          camera: {
+            position: {
+              x: 106.802522, 
+              y: 10.871395, 
+              z: 120
+            },
+            heading: 180,
+            tilt: 70
+          }
+        });
+
+        const houseLocation = new Point({
+          x: 106.802649,  
+          y: 10.869819, 
+          z: 27
+        });
+
+
+        Mesh.createFromGLTF(houseLocation, "./UIT.glb")
+          .then(function (geometry) {
+            geometry.scale(0.9, { origin: houseLocation });  
+            geometry.rotate(0, 0, 90);  
+            const graphic = new Graphic({
+              geometry: geometry,
+              symbol: {
+                type: "mesh-3d",
+                symbolLayers: [{
+                  type: "fill"
+                }]
+              }
+            });
+            sketchLayer.add(graphic);
+          })
+          .catch(console.error);
+
+        map.add(sketchLayer);
+      });
+    </script>
+  </head>
+
+  <body>
+    <div id="viewDiv"></div>
+  </body>
+</html>
