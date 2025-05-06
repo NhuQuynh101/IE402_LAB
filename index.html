@@ -57,9 +57,9 @@
           map: map,
           camera: {
             position: {
-              x: 106.802522, 
-              y: 10.871395, 
-              z: 120
+              x: 106.802366, 
+              y: 10.871718, 
+              z: 130
             },
             heading: 180,
             tilt: 70
@@ -69,7 +69,7 @@
         const houseLocation = new Point({
           x: 106.802649,  
           y: 10.869819, 
-          z: 27
+          z: 26
         });
 
 
@@ -84,7 +84,31 @@
                 symbolLayers: [{
                   type: "fill"
                 }]
+              },
+              attributes: {
+                Name: "Tòa nhà E - Trường Đại học Công nghệ Thông tin, ĐHQG TP.HCM",
+                "Số tầng": "12",
+                "Chiều cao": "46m",
+                "Diện tích xây dựng": "8600 m²",
+                "Tổng diện tích sàn": "8600 m²",
+                "Mã GIS": "UIT-E-001",
+                "Địa chỉ": "Khu phố 6, phường Linh Trung, TP. Thủ Đức, TP. HCM",
+                "Thông tin xây dựng": "Đây là tòa nhà có 12 tầng nổi, 01 tầng hầm, 01 tầng kỹ thuật, chiều cao công trình 46m, khung sàn BTCT toàn khối. Mỗi khoa 1 tầng, 4 tầng đầu tiên là phòng học cho CTTT, CLC."
+              },
+              popupTemplate: {
+                title: "{Name}",
+                content: `
+                  <table>
+                    <tr><td><b>Số tầng</b></td><td>{Số tầng}</td></tr>
+                    <tr><td><b>Chiều cao</b></td><td>{Chiều cao}</td></tr>
+                    <tr><td><b>Diện tích xây dựng</b></td><td>{Diện tích xây dựng}</td></tr>
+                    <tr><td><b>Tổng diện tích sàn</b></td><td>{Tổng diện tích sàn}</td></tr>
+                    <tr><td><b>Mã GIS</b></td><td>{Mã GIS}</td></tr>
+                    <tr><td><b>Địa chỉ</b></td><td>{Địa chỉ}</td></tr>
+                  </table>
+                  <p><b>Thông tin xây dựng:</b> {Thông tin xây dựng}</p>`
               }
+              
             });
             sketchLayer.add(graphic);
           })
